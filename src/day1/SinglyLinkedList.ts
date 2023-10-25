@@ -82,11 +82,9 @@ export default class SinglyLinkedList<T> {
     }
 
     get(idx: number): T | undefined {
-        if (this.head === undefined) return;
-
-        let cursor: Node<T> | undefined = this.head;
+        let cursor = this.head;
         let i = 0;
-        while (cursor !== undefined) {
+        while (cursor) {
             if (i === idx) {
                 return cursor.value;
             }
@@ -94,7 +92,6 @@ export default class SinglyLinkedList<T> {
             i++;
         }
         return;
-
     }
 
     removeAt(idx: number): T | undefined {
