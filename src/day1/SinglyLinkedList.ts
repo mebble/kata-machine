@@ -6,17 +6,18 @@ export default class SinglyLinkedList<T> {
     }
 
     prepend(item: T): void {
+        this.length++;
         if (this.head === undefined) {
             this.head = {
                 value: item,
             }
+            return;
         }
         const newNode: Node<T> = {
             value: item,
             next: this.head,
         }
         this.head = newNode;
-        this.length++;
     }
 
     insertAt(item: T, idx: number): void {
@@ -29,13 +30,14 @@ export default class SinglyLinkedList<T> {
         while (cursor !== undefined) {
             if (i === idx) {
                 if (prev === undefined) {
+                    this.prepend(item)
                     this.head = newNode;
                     newNode.next = cursor
                 } else {
                     prev.next = newNode
                     newNode.next = cursor
+                    this.length++;  // should not run alongside this.prepend otherwise double increment
                 }
-                this.length++;
             }
             prev = cursor;
             cursor = cursor.next;
@@ -52,7 +54,7 @@ export default class SinglyLinkedList<T> {
             return;
         }
 
-        let cursor: Node<T> | undefined = this.head;
+        let cursor = this.head;
         while (cursor.next !== undefined) {
             cursor = cursor.next;
         }
@@ -84,14 +86,11 @@ export default class SinglyLinkedList<T> {
     get(idx: number): T | undefined {
         let cursor = this.head;
         let i = 0;
-        while (cursor) {
-            if (i === idx) {
-                return cursor.value;
-            }
+        while (cursor && i < idx) {
             cursor = cursor.next;
             i++;
         }
-        return;
+        return cursor?.value;
     }
 
     removeAt(idx: number): T | undefined {
