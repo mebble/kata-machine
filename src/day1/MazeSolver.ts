@@ -1,3 +1,4 @@
+// Similar problem to DFSGraphList
 export default function solve(maze: string[], wall: string, start: Point, end: Point): Point[] {
     return solve_recurse(maze, wall, start, end, []);
 }
