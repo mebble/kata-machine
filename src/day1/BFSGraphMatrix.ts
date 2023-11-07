@@ -1,8 +1,9 @@
+// Similar to DijkstraList
 export default function bfs(graph: WeightedAdjacencyMatrix, sourceNode: number, needle: number): number[] | null {
     const seen: boolean[] = Array(graph.length).fill(false)
 
-    // [#] the node from where we came to get to THIS node
-    // This is where we store the information that would be equivalent to path.push and path.pop in DFS
+    // The node from where we came to get to THIS node
+    // [#] This is where we store the information that would be equivalent to path.push and path.pop in DFS
     const prev: number[] = Array(graph.length).fill(-1)
 
     const queue: number[] = [sourceNode];
