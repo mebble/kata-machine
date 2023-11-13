@@ -121,8 +121,12 @@ export default class DoublyLinkedList<T> {
     }
 }
 
-type Node<T> = {
+export type Node<T> = {
     value: T;
     next?: Node<T>;
     prev?: Node<T>;
+}
+
+export const createNode = <T>(value: T): Node<T> => {
+    return { value }
 }
